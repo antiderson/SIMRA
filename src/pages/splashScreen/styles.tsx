@@ -7,7 +7,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     logoContainer: {
-        flex: 1,
+        flex: 2,
         // backgroundColor: '#708090',
         justifyContent: 'flex-end',
     },
