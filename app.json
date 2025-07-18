@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "simraApp",
-    "slug": "simraApp",
+    "name": "SIMRA",
+    "slug": "SIMRA",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "assets/LogoSimra2.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
