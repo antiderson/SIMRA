@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import styles from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import GraphTemp from '../../components/graphTemp/GraphTemp';
+import GraphLuz from '../../components/graphLuminosity/GraphLuminosity';
+import VictoryGraph from '../victory';
 
 export default function Home() {
   return (
@@ -14,8 +16,9 @@ export default function Home() {
         >
           <View style={styles.header}>
             <Image source={require('../../assets/simraText.png')} style={styles.simratext} />
-            {/* <Text style={styles.title}>Welcome to Simra</Text> */}
           </View>
+          <VictoryGraph />
+          <GraphLuz />
           <GraphTemp />
         </LinearGradient>
   );
