@@ -3,20 +3,22 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        // flex: 0.7,
+        marginTop: 30,
+        flex: 1,
         alignItems: 'center',
         width: 350,
+        height: 60,
         borderRadius: 15,
         borderWidth: 1,
         borderColor: '#d1d1d1ff',
-        backgroundColor: 'rgba(255, 255, 255, 0.10)'
+        backgroundColor: 'rgba(255, 255, 255, 0.10)',
+        marginBottom: 50,
     },
     info: {
         flexDirection: 'row',
         padding: 15,
         justifyContent: 'space-between',
         width: 350,
-        // flex: 0.3,
 
     },
     title: {
@@ -46,14 +48,5 @@ export default StyleSheet.create({
         color: '#333',
         fontFamily: 'Poppins_300Light',
         marginBottom: 15,
-    },
-    graph: {
-        // flex: 1,
-        // width: '100%',
-        // height: 200,
-        // backgroundColor: 'red',
-        marginTop: -220,
-        // borderRadius: 10,
-        // marginTop: 20,
     },
 });

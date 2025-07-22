@@ -8,12 +8,10 @@ export default StyleSheet.create({
     },
     logoContainer: {
         flex: 2,
-        // backgroundColor: '#708090',
         justifyContent: 'flex-end',
     },
     loadingContainer: {
         flex: 2,
-        // backgroundColor: '#298090',
         justifyContent: 'flex-end',
     },
     title: {

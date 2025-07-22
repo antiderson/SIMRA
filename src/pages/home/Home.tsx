@@ -4,8 +4,6 @@ import styles from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import GraphTemp from '../../components/graphTemp/GraphTemp';
 import GraphLuz from '../../components/graphLuminosity/GraphLuminosity';
-import VictoryGraph from '../victory';
-
 export default function Home() {
   return (
     <LinearGradient
@@ -15,9 +13,8 @@ export default function Home() {
           style={styles.container}
         >
           <View style={styles.header}>
-            <Image source={require('../../assets/simraText.png')} style={styles.simratext} />
+            <Image source={require('../../assets/simraSlogan.png')} style={styles.simratext} />
           </View>
-          <VictoryGraph />
           <GraphLuz />
           <GraphTemp />
         </LinearGradient>
