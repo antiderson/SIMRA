@@ -50,9 +50,10 @@ export default StyleSheet.create({
     graph: {
         // flex: 1,
         // width: '100%',
+
         // height: 200,
         // backgroundColor: 'red',
-        marginTop: -220,
+        // marginTop: -220,
         // borderRadius: 10,
         // marginTop: 20,
     },

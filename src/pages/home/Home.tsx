@@ -1,9 +1,9 @@
-
-import { StyleSheet, Text, View, Image } from 'react-native';
-import styles from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
-import GraphTemp from '../../components/graphTemp/GraphTemp';
+import { Image, View } from 'react-native';
 import GraphLuz from '../../components/graphLuminosity/GraphLuminosity';
+import GraphTemp from '../../components/graphTemp/GraphTemp';
+import styles from './styles';
+
 export default function Home() {
   return (
     <LinearGradient

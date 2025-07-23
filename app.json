@@ -4,11 +4,11 @@
     "slug": "SIMRA",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "assets/LogoSimra2.png",
+    "icon": "./assets/LogoSimra2.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/LogoSimra2.png.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/LogoSimra2.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
