@@ -1,4 +1,3 @@
-
 #include <Wire.h>
 #include <BH1750.h>
 #include <OneWire.h>
@@ -15,8 +14,8 @@ DallasTemperature sensors(&oneWire);
 SoftwareSerial EspSerial(10, 11);
 
 // Wi-Fi
-String ssid = "";
-String senha = "";
+String ssid = "*rede wifi*";
+String senha = "*senha wi-fi*";
 
 // === SETUP ===
 void setup() {
@@ -37,7 +36,7 @@ void loop() {
     lastUpdate = millis();
 
     // Leitura dos sensores
-    uint16_t luz = lightMeter.readLightLevel();
+    uint16_t lux = lightMeter.readLightLevel();
     sensors.requestTemperatures();
     float temperatura = sensors.getTempCByIndex(0);
 
@@ -45,20 +44,26 @@ void loop() {
     bool temperaturaValida = temperatura > -100 && temperatura < 100;
     bool luzValido = luz > 0;
 
-    if (temperaturaValida && luzValido) {
-      Serial.println("Dados válidos. Enviando...");
+    if (temperaturaValida && luxValido) {
+      Serial.println("✅ Dados válidos detectados.");
+      Serial.print("📤 Enviando dados -> Temperatura: ");
+      Serial.print(temperatura, 2);
+      Serial.print(" °C | Luz: ");
+      Serial.println(lux);
       enviarParaWebhook(temperatura, luz);
     } else {
-      Serial.println("⚠️ Dados inválidos detectados. Temperatura ou luz fora do intervalo esperado.");
-      Serial.print("Temp: "); Serial.println(temperatura);
-      Serial.print("Luz: "); Serial.println(luz);
+      Serial.println("⚠️ Dados inválidos detectados.");
+      Serial.print("❌ Temperatura: ");
+      Serial.print(temperatura);
+      Serial.print(" °C | Luz: ");
+      Serial.println(luz);
     }
   }
 }
 
 // === FUNÇÕES AUXILIARES ===
 void conectarWiFi() {
-  Serial.println("Inicializando ESP8266...");
+  Serial.println("🔌 Inicializando ESP8266...");
 
   enviarComando("AT", 1000);
   enviarComando("AT+RST", 2000);
@@ -67,11 +72,13 @@ void conectarWiFi() {
   enviarComando("AT+CIPMUX=0", 1000);
 }
 
-void enviarParaWebhook(float temperatura, uint16_t lux) {
+void enviarParaWebhook(float temperatura, uint16_t luz) {
   String host = "webhook.site";
-  String caminho = "/*token*"; // Substitua com seu token atual
+  String caminho = "/*token do weebhook*"; // Substitua com seu token atual
 
   String dados = "{\"temperatura\":" + String(temperatura, 2) + ",\"luz\":" + String(luz) + "}";
+  Serial.println("📦 Payload JSON:");
+  Serial.println(dados);
 
   String requisicao =
     "POST " + caminho + " HTTP/1.1\r\n" +
@@ -81,14 +88,14 @@ void enviarParaWebhook(float temperatura, uint16_t lux) {
     dados;
 
   if (!enviarComandoEEsperar("AT+CIPSTART=\"TCP\",\"" + host + "\",80", "Linked", 5000)) {
-    Serial.println("Erro ao conectar ao Webhook");
+    Serial.println("❌ Erro ao conectar ao Webhook");
     return;
   }
 
   delay(100);
 
   if (!enviarComandoEEsperar("AT+CIPSEND=" + String(requisicao.length()), ">", 3000)) {
-    Serial.println("Erro ao iniciar envio de dados");
+    Serial.println("❌ Erro ao iniciar envio de dados");
     return;
   }
 

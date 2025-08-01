@@ -152,7 +152,8 @@ export default function GraphTemp() {
                         fontWeight="bold"
                         fill="#333"
                         textAnchor="middle" >
-                        {`${Math.round(percent)}°c`}
+                        {/* {`${Math.round(percent)}°c`} */}
+                        {`${percent.toFixed(1)}°C`} {/* Mudança para o valor ler o codigo vinddo do firebase sem arredondamento, FLOAT */}
                     </SvgText>
                 </Svg>
             </View>

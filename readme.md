@@ -1,7 +1,7 @@
 # 🌊 SIMRA - Sistema de Monitoramento Remoto de Aquário
 
 **SIMRA** É um sistema de automação e monitormento inteligente para aquários,
-desenvolvido como um Trabalho de Conclusão de Curso (TCC). Ele permite acompanhar remotamente parâmetros essenciais da qualidade da água, promovendo  o bem-estar dos organismos aquáticos e facilitando a rotina dos aquaristas, utilizando tecnologias de Internet das Coisas (IoT) e um aplicativo móvel integrado.
+desenvolvido como um Trabalho de Conclusão de Curso (TCC). Ele permite acompanhar remotamente parâmetros essenciais da qualidade da água, promovendo o bem-estar dos organismos aquáticos e facilitando a rotina dos aquaristas, utilizando tecnologias de Internet das Coisas (IoT) e um aplicativo móvel integrado.
 
 ---
 
@@ -23,8 +23,8 @@ desenvolvido como um Trabalho de Conclusão de Curso (TCC). Ele permite acompanh
 
 **Fluxo completo dos dados desde o SIMRA até o app**
 
-
-*aqui vai o diagrama de fluxo*
+![Fluxo de dados](./docs//PROCESSO%20V3%20(2).gif)
+<!-- *aqui vai o diagrama de fluxo* -->
 
 ---
 ## 📱 Aplicativo Mobile
@@ -52,7 +52,7 @@ O app foi desenvolvido com **React-Native (Expo)** e utiliza a biblioteca **Vict
     - Capsula protetora impermeável (impedindo contato direto com os circuitos)
 
 - **Backend:**
-    - Servidor intermediário (Node.js/Express) hospedado na Railway
+    - Servidor intermediário (Node.js/Express) hospedado na Railway (sevidor em outro repositorio)
     - Firebase Realtime Database para armazenamento dos dados
 
 - **Frontend:**
@@ -62,7 +62,7 @@ O app foi desenvolvido com **React-Native (Expo)** e utiliza a biblioteca **Vict
 ---
 
 ## 🗂️ Estrutura do projeto
-
+    `coming soon`
 ---
 
 ## 🔮 Futuras Expansões
