@@ -1,20 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/pages/home/Home';
+import Toast from 'react-native-toast-message';
+import Routes from './src/routes/Index';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Text strings must be rendered within a <Text> component',
+]);
 
 export default function App() {
   return (
     <>
-      <Home />
+      return <Routes />;
+      <Toast />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
