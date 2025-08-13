@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "@tamagui/config": "1.112.0",
+    "@tamagui/vite-plugin": "1.112.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "tamagui": "1.112.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
