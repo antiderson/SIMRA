@@ -1,0 +1,123 @@
+.container {
+      align-items: 'center';
+    width: 40%;
+    height: 500px;
+    border-radius: 15;
+    border-width: 1;
+    border-radius: 15px;
+}
+
+.iconBtn {
+    border-width: 0px;
+    background-color: transparent;
+    border-color: rgba(233, 233, 233, 0.1);
+}
+
+.info {
+   padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: blue; */
+    font-family: 'Poppins_400Regular';
+}
+
+
+
+.title {
+    flex-direction: 'row';
+    justify-content: 'space-between';
+    width: 180;
+}
+
+
+
+.text {
+    color: '#292929cc';
+    font-family: 'Poppins_300Light';
+    font-size: 24;
+    letter-spacing: -0.76;
+}
+
+
+.valueContainer {
+    flex-direction: 'row';
+    /* align-items: 'flex-end'; */
+    align-items: center;
+    /* background-color: red; */
+    width: '100%';
+    display: flex;
+    justify-content: center;
+    /* padding-inline-start: 50px; */
+}
+
+
+
+.value {
+    font-size: 100;
+    font-weight: '400';
+    color: '#333';
+}
+
+
+
+.additional {
+    font-size: 40;
+    color: '#333';
+    font-family: 'Poppins_300Light';
+    margin-bottom: 15;
+}
+
+
+
+.footer {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+
+
+.button {
+    width: 190px;
+    height: 40px;
+    border-color: rgba(88, 88, 88, 0.384);
+    background-color: rgba(217, 217, 217, 0.58);
+    border-width: 1px;
+    border-color: '#FFFFFF';
+    border-radius: 10px;
+    justify-content: 'center';
+    align-items: 'center';
+    /* // Sombras (iOS) */
+    flood-color: '#000';
+    /* shadowOffset: { width: 12, height: 17 }; */
+    flood-opacity: 0.22;
+    /* shadowRadius: 51; */
+    /* // Sombra (Android) */
+    /* // elevation: 10; */
+    /* 
+
+
+        // width: 190,
+        // backgroundColor: 'rgba(217, 217, 217, 0.58)',
+        // height: 74,
+        // borderColor: 'white',
+        // borderWidth: 1,
+        // boxShadow: '12px 17px 51px rgba(0, 0, 0, 0.22)',
+
+
+        //         boxizing: border-box,
+        //   backdrop-filter: blur(6px);
+        //   border-radius: 17px;
+        //   text-align: center;
+        //   cursor: pointer;
+        //   transition: all 0.5s;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   user-select: none;
+        //   font-weight: bolder;
+        //   color: black; */
+}

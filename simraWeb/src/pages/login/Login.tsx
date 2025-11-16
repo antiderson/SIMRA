@@ -1,17 +1,31 @@
-import { XStack, YStack, Button, Image } from "tamagui";
+import { XStack, YStack, Button } from "tamagui";
 import styles from './index.module.css';
+import { useNavigate } from "react-router-dom"
 import { CopyrightIcon, InfoIcon } from "@phosphor-icons/react"
-import { useState } from "react";
+import { useRef, useState } from "react";
 import fundoLogin from '../../assets/banner.jpg';
-import logo from '../../assets/LogoSimra2.png';
+import logo from '../../assets/LogoSimra.png';
+import { Toast } from 'primereact/toast';
 
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error] = useState('');
-    // const toast = useRef<Toast>(null);
+    const navigate = useNavigate();
+    const toast = useRef<Toast>(null);
 
+    const handleLogin = () => {
+        console.log(email, password);
+        if (email === 'andersondaniel.adfa@gmail.com' && password === '123456') {
+            toast.current?.show({ severity: 'success', summary: 'Login realizado com sucesso!', life: 3000 });
+            setTimeout(() => {
+                navigate('/dashboard');
+            }, 3000);
+        } else {
+            toast.current?.show({ severity: 'error', summary: 'Erro no login', detail: 'Email ou senha incorretos.', life: 3000 });
+        }
+    }
 
     return (
         <XStack style={{ maxWidth: "100%" }} >
@@ -23,14 +37,15 @@ export default function Login() {
                 height: '100vh'
             }} />
             <YStack width={'40%'} h="100vh" justifyContent="space-around" alignItems="center" >
-                {/* <Toast ref={toast} position="top-center" /> */}
+                <Toast ref={toast} position="bottom-center" />
                 <YStack className={styles.formLayout}  >
                     <YStack width="100%" h={'50px'} alignItems="flex-end" >
                         <InfoIcon size={32} color="#7a7a7a" />
                         {/* <SheetInfo /> */}
                     </YStack>
-                    <YStack h={'200px'} alignItems="center">
-                        <Image src={logo} alt="" h={'90%'} w={'60%'} />
+                    <YStack alignItems="center">
+                        {/* <image src={logo} alt="" h={'300px'} w={'300px'}  /> */}
+                        <img src={logo} className={styles.logo} />
                     </YStack>
                     <YStack h={'20%'} justifyContent="space-between">
                         <input className={styles.input}
@@ -46,9 +61,9 @@ export default function Login() {
                             placeholder="Senha"
                         />
                     </YStack>
-                    {/* <Button className={styles.btnLog} onPress={handleLogin} fontFamily={'$body'} color={'$white1'} unstyled>
+                    <Button className={styles.btnLog} onPress={handleLogin} fontFamily={'$body'} color={'$white1'} unstyled>
                         Entrar
-                    </Button> */}
+                    </Button>
                     <YStack width="100%" h={'70px'} alignItems="flex-end" justifyContent="flex-end" >
                         {/* <SheetPsswd /> */}
                     </YStack>
@@ -56,7 +71,7 @@ export default function Login() {
                 </YStack>
                 <XStack alignItems="center">
                     <CopyrightIcon size={32} color="#7a7a7a" />
-                    <p color="#7a7a7a"> 2024 - Todos os direitos reservados - desenvolvido por IASD petrópolis</p>
+                    <p color="#7a7a7a"> 2025 — Todos os direitos reservados — Desenvolvido por SIMRA</p>
                 </XStack>
             </YStack>
         </XStack>

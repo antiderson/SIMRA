@@ -1,8 +1,18 @@
+import { Button, XStack, YStack } from "tamagui";
+import styles from './index.module.css'
+import slogan from '../../assets/slogan.png'
+import GraphLuz from "../../components/graphLuminosity/GraphLuminosity";
+import Header from "../../components/header/Header";
+import GraphTemp from "../../components/graphTemp/GraphTemp";
+
 export default function Home() {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page of the application.</p>
-    </div>
+    <YStack className={styles.container}> 
+      <Header />
+      <XStack margin={'auto'} w={'100%'} justifyContent="space-around" >
+        <GraphLuz />
+        <GraphTemp />
+      </XStack>
+    </YStack>
   );
 }
