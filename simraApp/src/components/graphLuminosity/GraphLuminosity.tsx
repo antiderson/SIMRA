@@ -1,7 +1,7 @@
 import { onValue, ref, set } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useEffect, useState,  } from "react";
 import { db } from "../../services/firebaseConfig";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import styles from './styles';
 import { LightbulbIcon, PencilIcon } from "phosphor-react-native";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTooltip } from "victory-native";
@@ -114,6 +114,11 @@ export default function GraphLuz() {
         { data: { fill: "#0ca340", stroke: "#0ca340", strokeWidth: 1 } }, // Ideal
         { data: { fill: "#ff4d4d", stroke: "#ff0000", strokeWidth: 1 } }, // Alta
     ];
+
+    const novoteste =() =>{
+        console.error("clicou")
+    }
+   
     return (
         <View style={styles.container}>
             <View style={styles.info}>
@@ -125,12 +130,16 @@ export default function GraphLuz() {
                     <PencilIcon size={32} color="#5e5e5e" weight="duotone" />
                 </TouchableOpacity>
             </View>
+            <View style={styles.footer}>
+                <TouchableOpacity onPress={() => novoteste()} style={styles.button}><Text>Entenda a importancia</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => novoteste()} style={styles.button}><Text>Recomendações</Text></TouchableOpacity>
+            </View>
             <View style={styles.valueContainer}>
                 <Text style={styles.value}>{luz !== null ? `${luz}` : '...'}</Text>
                 <Text style={styles.additional}>Im</Text>
             </View>
             {/* <View style={styles.graph}> */}
-            <VictoryChart height={80} domain={{ y: [0, 1500] }} >
+            <VictoryChart height={80} width={700} domain={{ y: [0, 1500] }}>
                 <VictoryAxis
                     dependentAxis
                     tickValues={[0, 300, 1100, 1500]}
@@ -156,13 +165,13 @@ export default function GraphLuz() {
                         />
                     ))}
                 </VictoryStack>
+                
             </VictoryChart>
             {/* </View> */}
             <ModalLimitLum
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
                 onSave={handleSaveLimits}
-
             />
         </View>
     )

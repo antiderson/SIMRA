@@ -3,7 +3,7 @@
 import { onValue, ref, set } from "firebase/database";
 import { PencilIcon, ThermometerIcon } from "phosphor-react-native";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import Svg from "react-native-svg";
 import { VictoryPie } from "victory-native";
 import { db } from "../../services/firebaseConfig";
@@ -11,6 +11,7 @@ import styles from './styles';
 import { Defs, LinearGradient, Stop, Text as SvgText } from "react-native-svg";
 import ModalLimitTemp from "../limitTemp/ModalLimitTemp";
 import Toast from "react-native-toast-message";
+import ImportanceTemp from "../importance/ImportanceTemp";
 
 
 function getData(percent: number) {
@@ -25,6 +26,7 @@ export default function GraphTemp() {
     const [percent, setPercent] = useState(0);
     const [data, setData] = useState(getData(0));
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalImporanceVisible, setModalImportanceVisible] = useState(false);
 
     const handleSaveLimits = async (limits: { min: number; max: number }) => {
         try {
@@ -121,13 +123,14 @@ export default function GraphTemp() {
                 <TouchableOpacity onPress={() => setModalVisible(true)}>
                     <PencilIcon size={32} color="#5e5e5e" weight="duotone" />
                 </TouchableOpacity>
+
             </View>
             <View style={styles.valueContainer}>
-                <Svg width={250} height={250} viewBox="0 0 400 400">
+                <Svg width={360} height={360} viewBox="0 0 400 400">
                     <Defs>
-                        <LinearGradient id="tempGradient" x1="0" y1="0" x2="1" y2="0">
-                            <Stop offset="0" stopColor="blue" />
-                            <Stop offset="1" stopColor="red" />
+                        <LinearGradient id="tempGradient" x1="0" y1="1" x2="1" y2="1">
+                            <Stop offset="0" stopColor="red" />
+                            <Stop offset="1" stopColor="blue" />
                         </LinearGradient>
                     </Defs>
                     <VictoryPie
@@ -157,10 +160,18 @@ export default function GraphTemp() {
                     </SvgText>
                 </Svg>
             </View>
+            <View style={styles.footer}>
+                <TouchableOpacity onPress={() => setModalImportanceVisible(true)} style={styles.button}><Text>Entenda a importancia</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button}><Text>Recomendações</Text></TouchableOpacity>
+            </View>
             <ModalLimitTemp
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
                 onSave={handleSaveLimits}
+            />
+            <ImportanceTemp
+                visible={modalImporanceVisible}
+                onClose={() => setModalImportanceVisible(false)}
             />
         </View>
     );
