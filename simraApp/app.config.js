@@ -5,6 +5,11 @@ export default {
     name: 'Simra',
     slug: 'Simra',
     version: '1.0.0',
+    icon: './assets/simraSlogan.png',
+    
+    android: {
+      package: "com.derson.simra",
+    },
     extra: {
       firebase: {
         apiKey: process.env.FIREBASE_API_KEY,
@@ -15,6 +20,9 @@ export default {
         appId: process.env.FIREBASE_APP_ID,
         measurementId: process.env.FIREBASE_MEASUREMENT_ID,
         databaseURL: process.env.FIREBASE_DATABASE_URL,
+      },
+      eas: {
+        projectId: "c130be91-fe9a-4f06-b912-c5b462a8e890"
       }
     }
   }
