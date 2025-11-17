@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'SeuApp',
-    slug: 'seu-app',
+    name: 'Simra',
+    slug: 'Simra',
     version: '1.0.0',
     extra: {
       firebase: {

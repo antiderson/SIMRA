@@ -28,7 +28,7 @@ export default function ModalLimitTemp({ visible, onClose, onSave }: ModalLimitT
     };
 
     return (
-        <Modal visible={visible} transparent animationType="slide">
+        <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
             <View style={styles.modalOverlay}>
                 <View style={styles.modalContainer}>
                     <Text style={styles.modalTitle}> Definir limites de temperatura</Text>

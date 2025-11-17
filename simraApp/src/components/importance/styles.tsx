@@ -6,6 +6,7 @@ export default StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
         alignItems: 'center',
+        height: '100%',
     },
     modalContainer: {
         width: '85%',

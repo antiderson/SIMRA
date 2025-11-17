@@ -1,17 +1,19 @@
 import { onValue, ref, set } from "firebase/database";
-import { useEffect, useState,  } from "react";
+import { useEffect, useState, } from "react";
 import { db } from "../../services/firebaseConfig";
-import { Button, Text, TouchableOpacity, View } from "react-native";
+import { Button, Linking, Text, TouchableOpacity, View } from "react-native";
 import styles from './styles';
 import { LightbulbIcon, PencilIcon } from "phosphor-react-native";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTooltip } from "victory-native";
 import Toast from "react-native-toast-message";
 import ModalLimitLum from "../limitLum/ModalLimitLum";
+import ImportanceLux from "../importance/ImportanceLuz";
 
 
 export default function GraphLuz() {
     const [luz, setLuz] = useState<number | null>(null);
     const [modalVisible, setModalVisible] = useState(false)
+    const [modalImporanceVisible, setModalImportanceVisible] = useState(false);
 
     const handleSaveLimits = async (limits: { min: number, max: number }) => {
         try {
@@ -115,10 +117,13 @@ export default function GraphLuz() {
         { data: { fill: "#ff4d4d", stroke: "#ff0000", strokeWidth: 1 } }, // Alta
     ];
 
-    const novoteste =() =>{
+    const novoteste = () => {
         console.error("clicou")
     }
-   
+    const handleOpenLink = () =>{
+        Linking.openURL('https://www.thesprucepets.com/fish-and-aquariums-4162060')
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.info}>
@@ -131,8 +136,8 @@ export default function GraphLuz() {
                 </TouchableOpacity>
             </View>
             <View style={styles.footer}>
-                <TouchableOpacity onPress={() => novoteste()} style={styles.button}><Text>Entenda a importancia</Text></TouchableOpacity>
-                <TouchableOpacity onPress={() => novoteste()} style={styles.button}><Text>Recomendações</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => setModalImportanceVisible(true)} style={styles.button}><Text>Entenda a importancia</Text></TouchableOpacity>
+                <TouchableOpacity onPress={handleOpenLink} style={styles.button}><Text>Recomendações</Text></TouchableOpacity>
             </View>
             <View style={styles.valueContainer}>
                 <Text style={styles.value}>{luz !== null ? `${luz}` : '...'}</Text>
@@ -165,13 +170,17 @@ export default function GraphLuz() {
                         />
                     ))}
                 </VictoryStack>
-                
+
             </VictoryChart>
             {/* </View> */}
             <ModalLimitLum
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
                 onSave={handleSaveLimits}
+            />
+            <ImportanceLux
+                visible={modalImporanceVisible}
+                onClose={() => setModalImportanceVisible(false)}
             />
         </View>
     )

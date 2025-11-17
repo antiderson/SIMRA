@@ -8,7 +8,7 @@ type ImportanceTempProps = {
 
 export default function ImportanceTemp({ visible, onClose }: ImportanceTempProps) {
     return (
-        <Modal visible={visible} transparent animationType="slide">
+        <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
             <View style={styles.modalOverlay}>
                 <View style={styles.modalContainer}>
                     <Text style={styles.modalTitle}>Importancia de uma temperatura estabilizada</Text>

@@ -3,7 +3,7 @@
 import { onValue, ref, set } from "firebase/database";
 import { PencilIcon, ThermometerIcon } from "phosphor-react-native";
 import React, { useEffect, useState } from "react";
-import { Button, Text, TouchableOpacity, View } from "react-native";
+import { Button, Linking, Text, TouchableOpacity, View } from "react-native";
 import Svg from "react-native-svg";
 import { VictoryPie } from "victory-native";
 import { db } from "../../services/firebaseConfig";
@@ -112,6 +112,10 @@ export default function GraphTemp() {
         });
     }, []);
 
+    const handleOpenLink = () =>{
+        Linking.openURL('https://www.thesprucepets.com/fish-and-aquariums-4162060')
+    }
+
 
     return (
         <View style={styles.container}>
@@ -162,7 +166,7 @@ export default function GraphTemp() {
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity onPress={() => setModalImportanceVisible(true)} style={styles.button}><Text>Entenda a importancia</Text></TouchableOpacity>
-                <TouchableOpacity style={styles.button}><Text>Recomendações</Text></TouchableOpacity>
+                <TouchableOpacity onPress={handleOpenLink} style={styles.button}><Text>Recomendações</Text></TouchableOpacity>
             </View>
             <ModalLimitTemp
                 visible={modalVisible}

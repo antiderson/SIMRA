@@ -28,7 +28,7 @@ export default function ModalLimitLum({ visible, onClose, onSave}: ModalLimitLum
     }
 
     return(
-        <Modal visible={visible} transparent animationType="slide">
+        <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
             <View style={styles.modalOverlay}>
                 <View style={styles.modalContainer}>
                     <Text style={styles.modalTitle}>Definir limites de Luminosidade</Text>
