@@ -5,12 +5,12 @@
 #include <SoftwareSerial.h>
 
 // === DEFINIÇÕES GERAIS ===
-#define ONE_WIRE_BUS 12  // Pino do DS18B20 (temperatura)
+#define ONE_WIRE_BUS 12
 BH1750 lightMeter;
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
-// Serial do ESP8266 (pinos 10 e 11)
+// Serial do ESP8266
 SoftwareSerial EspSerial(10, 11);
 
 // Wi-Fi
@@ -26,6 +26,7 @@ void setup() {
   lightMeter.begin();
   sensors.begin();
 
+  delay(1500); // Tempo para estabilizar hardware
   conectarWiFi();
 }
 
@@ -36,27 +37,22 @@ void loop() {
     lastUpdate = millis();
 
     // Leitura dos sensores
-    uint16_t lux = lightMeter.readLightLevel();
+    uint16_t luz = lightMeter.readLightLevel();
     sensors.requestTemperatures();
     float temperatura = sensors.getTempCByIndex(0);
 
-    // Filtro de valores inválidos
     bool temperaturaValida = temperatura > -100 && temperatura < 100;
     bool luzValido = luz > 0;
 
-    if (temperaturaValida && luxValido) {
+    if (luzValido && temperaturaValida) {
       Serial.println("✅ Dados válidos detectados.");
       Serial.print("📤 Enviando dados -> Temperatura: ");
       Serial.print(temperatura, 2);
-      Serial.print(" °C | Luz: ");
+      Serial.print(" °C | Lux: ");
       Serial.println(lux);
-      enviarParaWebhook(temperatura, luz);
+      enviarParaWebhook(temperatura, lux);
     } else {
       Serial.println("⚠️ Dados inválidos detectados.");
-      Serial.print("❌ Temperatura: ");
-      Serial.print(temperatura);
-      Serial.print(" °C | Luz: ");
-      Serial.println(luz);
     }
   }
 }
@@ -65,18 +61,23 @@ void loop() {
 void conectarWiFi() {
   Serial.println("🔌 Inicializando ESP8266...");
 
-  enviarComando("AT", 1000);
-  enviarComando("AT+RST", 2000);
-  enviarComando("AT+CWMODE=1", 1000);
-  enviarComando("AT+CWJAP=\"" + ssid + "\",\"" + senha + "\"", 6000);
+  enviarComando("AT", 800);
+  enviarComando("AT+RST", 2500);
+  delay(1500); // 👈 ESP reinicia e precisa de tempo
+
+  enviarComando("AT+CWMODE=1", 800);
+  enviarComando("AT+CWJAP=\"" + ssid + "\",\"" + senha + "\"", 9000); // 👈 Mais tempo para conectar no Wi-Fi
+  delay(2000); // 👈 *importantíssimo*
+  
   enviarComando("AT+CIPMUX=0", 1000);
 }
 
 void enviarParaWebhook(float temperatura, uint16_t luz) {
   String host = "webhook.site";
-  String caminho = "/*token do weebhook*"; // Substitua com seu token atual
+  String caminho = "/7a73eca8-e6d8-403c-a316-c8f86f06454d";
 
   String dados = "{\"temperatura\":" + String(temperatura, 2) + ",\"luz\":" + String(luz) + "}";
+
   Serial.println("📦 Payload JSON:");
   Serial.println(dados);
 
@@ -87,21 +88,22 @@ void enviarParaWebhook(float temperatura, uint16_t luz) {
     "Content-Length: " + String(dados.length()) + "\r\n\r\n" +
     dados;
 
-  if (!enviarComandoEEsperar("AT+CIPSTART=\"TCP\",\"" + host + "\",80", "Linked", 5000)) {
+  if (!enviarComandoEEsperar("AT+CIPSTART=\"TCP\",\"" + host + "\",80", "Linked", 6000)) {
     Serial.println("❌ Erro ao conectar ao Webhook");
     return;
   }
 
-  delay(100);
+  delay(1200); // dá tempo para o servidor abrir a conexão
 
-  if (!enviarComandoEEsperar("AT+CIPSEND=" + String(requisicao.length()), ">", 3000)) {
+  if (!enviarComandoEEsperar("AT+CIPSEND=" + String(requisicao.length()), ">", 4000)) {
     Serial.println("❌ Erro ao iniciar envio de dados");
     return;
   }
 
   EspSerial.print(requisicao);
-  delay(2000);
-  enviarComando("AT+CIPCLOSE", 1000);
+  delay(1800);
+
+  enviarComando("AT+CIPCLOSE", 1200);
 }
 
 bool enviarComandoEEsperar(String cmd, String esperado, int tempoLimite) {

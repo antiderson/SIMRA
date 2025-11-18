@@ -6,11 +6,12 @@ import { VictoryPie } from "victory";
 import { db } from "../../services/firebaseConfig";
 import { Toast } from 'primereact/toast';
 
-// import ModalLimitTemp from "../limitTemp/ModalLimitTemp";
+import ModalLimitTemp from "../limitTemp/ModalLimitTemp";
 // import ImportanceTemp from "../importance/ImportanceTemp";
 
 import { PencilIcon, ThermometerIcon } from "@phosphor-icons/react";
 import { Heading } from "tamagui";
+// import { useNavigate } from "react-router-dom";
 
 function getData(percent: number) {
     return [
@@ -23,8 +24,9 @@ export default function GraphTemp() {
     const [percent, setPercent] = useState(0);
     const [data, setData] = useState(getData(0));
     const [modalVisible, setModalVisible] = useState(false);
-    const [modalImportanceVisible, setModalImportanceVisible] = useState(false);
+    // const [modalImportanceVisible, setModalImportanceVisible] = useState(false);
     const toast = useRef<Toast>(null);
+    
 
     const handleSaveLimits = async (limits: { min: number; max: number }) => {
         try {
@@ -68,13 +70,13 @@ export default function GraphTemp() {
                 if (temp < limitesAtual.min) {
                     toast.current?.show({
                         severity: "warn",
-                        summary: `Temperatura muito baixa (atual: ${temp} Im)`,
+                        summary: `Temperatura muito baixa (atual: ${temp} °C)`,
                         life: 3500,
                     });
                 } else if (temp > limitesAtual.max) {
                     toast.current?.show({
                         severity: "warn",
-                        summary: `Temperatura muito alta (atual: ${temp} Im)`,
+                        summary: `Temperatura muito alta (atual: ${temp} °C)`,
                         life: 3500,
                     });
                 }
@@ -82,6 +84,10 @@ export default function GraphTemp() {
             
         });
     }, []);
+
+    const handleRecomendation = () => {
+        window.location.href = 'https://www.thesprucepets.com/fish-and-aquariums-4162060';
+    };
 
     return (
         <div className={styles.container} style={{ borderWidth: 2, borderStyle: 'solid', borderColor: 'rgba(58, 58, 58, 0.1)' }}>
@@ -100,7 +106,7 @@ export default function GraphTemp() {
                 <button onClick={novoteste} className={styles.button}>
                     Entenda a importância
                 </button>
-                <button onClick={novoteste} className={styles.button}>
+                <button onClick={handleRecomendation} className={styles.button} >
                     Recomendações
                 </button>
             </div>
@@ -145,11 +151,11 @@ export default function GraphTemp() {
                 </svg>
             </div>
 
-            {/* <ModalLimitTemp
+            <ModalLimitTemp
                 visible={modalVisible}
                 onClose={() => setModalVisible(false)}
                 onSave={handleSaveLimits}
-            /> */}
+            />
 
             {/* <ImportanceTemp
                 visible={modalImportanceVisible}

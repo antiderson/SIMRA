@@ -40,6 +40,10 @@ export default function GraphLuz() {
         }
     };
 
+    const handleRecomendation = () => {
+        window.location.href = 'https://www.thesprucepets.com/fish-and-aquariums-4162060';
+    };
+
     useEffect(() => {
         const luzRef = ref(db, "sensores/lux");
         const limitesRef = ref(db, "limites/luminosidade");
@@ -95,9 +99,6 @@ export default function GraphLuz() {
     const novoteste = () => {
         console.log("clicou");
     };
-    const controlede = () => {
-        console.log("clicou no controle de luminosidade");
-    }
     return (
         <div className={styles.container} style={{ borderWidth: 2, borderStyle: 'solid', borderColor: 'rgba(58, 58, 58, 0.1)' }}>
               <Toast ref={toast} position="bottom-center" />
@@ -115,7 +116,7 @@ export default function GraphLuz() {
                 <button onClick={novoteste} className={styles.button}>
                     Entenda a importância
                 </button>
-                <button onClick={novoteste} className={styles.button}>
+                <button onClick={handleRecomendation} className={styles.button}>
                     Recomendações
                 </button>
             </div>

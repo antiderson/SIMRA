@@ -1,6 +1,6 @@
-import { Button, XStack, YStack } from "tamagui";
+import { XStack, YStack } from "tamagui";
 import styles from './index.module.css'
-import slogan from '../../assets/slogan.png'
+// import slogan from '../../assets/slogan.png'
 import GraphLuz from "../../components/graphLuminosity/GraphLuminosity";
 import Header from "../../components/header/Header";
 import GraphTemp from "../../components/graphTemp/GraphTemp";
